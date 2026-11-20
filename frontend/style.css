@@ -74,3 +74,39 @@ footer {
   text-align: center;
   padding: 10px;
 }
+
+.box {
+  width: 350px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #f8fafc;
+  border: 1px solid #c9d1da;
+  border-radius: 8px;
+}
+
+.box h2 {
+  text-align: center;
+}
+
+.box input {
+  width: 95%;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1f3a5f;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+}
+
+.small {
+  text-align: center;
+  font-size: 13px;
+  color: #1f5fa8;
+}
