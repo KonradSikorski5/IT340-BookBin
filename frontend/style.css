@@ -25,6 +25,48 @@ header h1 {
   margin-left: 20px;
 }
 
+.page {
+  padding: 30px 40px;
+  min-height: 450px;
+}
+
+h2 {
+  color: #1f3a5f;
+}
+
+.search input {
+  width: 75%;
+  padding: 8px;
+}
+
+.search button {
+  width: 120px;
+  padding: 10px;
+  background-color: #1f3a5f;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+}
+
+.book {
+  display: inline-block;
+  width: 185px;
+  margin-right: 12px;
+  padding: 10px;
+  border: 1px solid #ccd3db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.cover {
+  height: 150px;
+  background-color: #d5dbe2;
+  color: #667;
+  text-align: center;
+  line-height: 150px;
+}
+
 footer {
   background-color: #f0f2f5;
   color: #666;
