@@ -19,6 +19,13 @@ function hashPassword(password) {
   return salt + ":" + hash;
 }
 
+function checkPassword(password, saved) {
+  const parts = saved.split(":");
+  const salt = parts[0];
+  const hash = crypto.scryptSync(password, salt, 64).toString("hex");
+  return hash === parts[1];
+}
+
 app.get("/", (req, res) => {
   res.send("BookBin back-end is running");
 });
@@ -41,6 +48,20 @@ app.post("/register", async (req, res) => {
 
   console.log("New account created: " + username);
   res.json({ message: "Account created" });
+});
+
+app.post("/login", async (req, res) => {
+  const username = String(req.body.username);
+  const password = String(req.body.password);
+
+  const user = await users.findOne({ username: username });
+  if (!user || !checkPassword(password, user.password)) {
+    console.log("Failed login: " + username);
+    return res.json({ message: "Incorrect username or password" });
+  }
+
+  console.log("Login: " + username);
+  res.json({ message: "Login successful", username: username });
 });
 
 app.listen(3000, () => {
