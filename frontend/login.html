@@ -16,19 +16,42 @@
   <div class="page">
     <div class="box">
       <h2>Log In</h2>
-      <form>
+      <form id="loginForm">
         <label>Username</label>
-        <input type="text" placeholder="Enter your username" required>
+        <input type="text" id="username" placeholder="Enter your username" required>
 
         <label>Password</label>
-        <input type="password" placeholder="Enter your password" required>
+        <input type="password" id="password" placeholder="Enter your password" required>
 
         <button type="submit">Log In</button>
       </form>
+      <p class="small" id="message"></p>
       <p class="small">Don't have an account? <a href="register.html">Register here</a></p>
     </div>
   </div>
 
   <footer>BookBin - IT 340 Project</footer>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value
+        })
+      });
+
+      const data = await response.json();
+      if (data.message === "Login successful") {
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("message").textContent = data.message;
+      }
+    });
+  </script>
 </body>
 </html>
