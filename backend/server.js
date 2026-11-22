@@ -23,6 +23,26 @@ app.get("/", (req, res) => {
   res.send("BookBin back-end is running");
 });
 
+app.post("/register", async (req, res) => {
+  const username = String(req.body.username);
+  const email = String(req.body.email);
+  const password = String(req.body.password);
+
+  const existing = await users.findOne({ username: username });
+  if (existing) {
+    return res.json({ message: "Username already taken" });
+  }
+
+  await users.insertOne({
+    username: username,
+    email: email,
+    password: hashPassword(password)
+  });
+
+  console.log("New account created: " + username);
+  res.json({ message: "Account created" });
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
