@@ -9,8 +9,8 @@
     <h1>BookBin</h1>
     <span class="links">
       <a href="index.html">Home</a>
-      <a href="#">Hello, konrad</a>
-      <a href="login.html">Log Out</a>
+      <a href="#" id="hello">Hello</a>
+      <a href="login.html" id="logout">Log Out</a>
     </span>
   </header>
 
@@ -49,5 +49,18 @@
   </div>
 
   <footer>BookBin - IT 340 Project</footer>
+
+  <script>
+    const username = localStorage.getItem("username");
+    if (!username) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("hello").textContent = "Hello, " + username;
+    }
+
+    document.getElementById("logout").addEventListener("click", function () {
+      localStorage.removeItem("username");
+    });
+  </script>
 </body>
 </html>
