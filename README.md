@@ -25,7 +25,20 @@ The pages are hosted with nginx on my Front-End VM (Ubuntu). I clone this repo o
 - Passwords are hashed with Node's built-in crypto module (random salt + scrypt hash)
 - User input is turned into plain text with String() so it can't be used for injection
 - nginx on the Front-End forwards /api/ requests to the Back-End
-- UFW firewall on each VM only allows the traffic that VM needs
+
+### Firewall (UFW)
+| VM | Allowed in |
+|---|---|
+| Front-End | port 80 (website) and 22 (ssh) |
+| Back-End | port 3000 from the Front-End only, and 22 |
+| Database | port 27017 from the Back-End only, and 22 |
+
+MongoDB listens on all addresses (bindIp 0.0.0.0) because it started before the network was ready at boot. UFW makes sure only the Back-End can reach it.
+
+### System Logs
+- Front-End: /var/log/nginx/access.log (every web request, including logins)
+- Database: /var/log/mongodb/mongod.log
+- All VMs: /var/log/auth.log (logins and sudo use)
 
 ## AI Usage
 I used Claude to help with the HTML, CSS, and the back-end code. I built each file in VS Code one piece at a time, and Claude gave me the code for each piece and explained what it does so I understand it. The layout is based on the mockups in my proposal.
